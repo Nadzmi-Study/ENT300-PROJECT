@@ -1,0 +1,108 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/linearLayout">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/ip"
+            android:layout_gravity="center"
+            android:clickable="true"
+            android:editable="true"
+            android:ellipsize="end"
+            android:enabled="true"
+            android:gravity="center_vertical|center_horizontal"
+            android:inputType="text"
+            android:text="IP ADDRESS"
+            android:singleLine="true"
+            android:visibility="visible"
+            android:textStyle="normal" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/port"
+            android:layout_gravity="center"
+            android:autoText="false"
+            android:clickable="true"
+            android:editable="true"
+            android:ellipsize="end"
+            android:enabled="true"
+            android:gravity="center_vertical|center_horizontal"
+            android:inputType="text"
+            android:numeric="integer"
+            android:text="PORT NUMBER"
+            android:singleLine="true"
+            android:textStyle="normal"
+            android:visibility="visible" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="LOCK"
+            android:id="@+id/action"
+            android:layout_gravity="top"
+            android:ellipsize="end"
+            android:clickable="true"
+            android:capitalize="words"
+            android:enabled="true"
+            android:gravity="center_vertical|center_horizontal"
+            android:editable="false"
+            android:onClick="Start"
+            android:singleLine="false"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:typeface="serif"
+            android:visibility="visible" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="CONNECT"
+            android:id="@+id/connect"
+            android:clickable="true"
+            android:ellipsize="end"
+            android:enabled="true"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:onClick="connect" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/linearLayout">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="
+            \n1) Input IP address and the port number.
+            \n2) Touch the connect button.
+            \n3) Then, touch the 'Lock' or 'Unlock' button to lock or unlock the door."
+            android:id="@+id/output"
+            android:autoText="false"
+            android:enabled="true"
+            android:gravity="fill_horizontal"
+            android:longClickable="true"
+            android:linksClickable="true"
+            android:textSize="15dp"
+            android:textStyle="normal"
+            android:typeface="monospace"
+            android:visibility="visible" />
+
+    </LinearLayout>
+</RelativeLayout>
