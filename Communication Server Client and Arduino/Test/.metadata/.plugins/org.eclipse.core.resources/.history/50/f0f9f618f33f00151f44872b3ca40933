@@ -1,0 +1,39 @@
+import java.net.*;
+import java.io.*;
+
+import com.fazecast.jSerialComm.SerialPort;
+
+public class Server {
+	public static void main(String [] args) {	
+		try {
+			final ServerSocket server = new ServerSocket(9090);
+			System.out.println("Server started");
+			
+			new Thread(new Runnable() {
+				public void run() {
+					while(true) {
+						String input = null;
+						
+						try {
+							System.out.println("Waiting for command...");
+							Socket client = server.accept();
+							
+							BufferedReader reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
+							input = reader.readLine();
+							System.out.println("Input: "+input);
+							
+							reader.close();
+							client.close();
+						} catch(Exception e) {
+							e.printStackTrace();
+						} finally {
+							System.out.println("Input: "+input);
+						}
+					}
+				}
+			}).start();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+}
