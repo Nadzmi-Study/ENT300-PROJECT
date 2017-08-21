@@ -1,0 +1,35 @@
+import java.net.*;
+import java.io.*;
+public class Server {
+	public static void main(String [] args) {
+		ServerSocket server = null;
+		Socket client = null;
+		BufferedReader reader = null;
+		
+		String input = null;
+		int port = 9090;
+		
+		try {
+			System.out.println("Starting server...");
+			server = new ServerSocket(port);
+			client = server.accept();
+			System.out.println("Server started");
+			
+			System.out.println("Initializing IO streams...");
+			reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
+			System.out.println("IO stream initialized");
+			
+			System.out.println("Reading input...");
+			input = reader.readLine();
+			System.out.println("Input: "+input);
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				reader.close();
+				client.close();
+				server.close();
+			} catch(Exception e) { e.printStackTrace(); }
+		}
+	}
+}

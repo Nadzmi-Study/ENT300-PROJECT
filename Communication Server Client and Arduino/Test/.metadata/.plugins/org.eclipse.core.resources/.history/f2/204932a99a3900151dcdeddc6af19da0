@@ -1,0 +1,45 @@
+import java.net.*;
+import java.io.*;
+
+import com.fazecast.jSerialComm.SerialPort;
+
+public class Server {
+	public static void main(String [] args) {	
+		try {
+			final ServerSocket server = new ServerSocket(9090);
+			SerialPort port = SerialPort.getCommPorts()[0];
+			
+			System.out.println("Server started");
+			System.out.println("Port initialized: "+port.getDescriptivePortName());
+			
+			if(port.openPort()) {
+				BufferedReader reader = null;
+				String input = null;
+				
+				try {
+					Socket client = server.accept();
+					
+					reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
+					input = reader.readLine();
+					System.out.println("Input: "+input);
+					reader.close();
+					
+					BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(port.getOutputStream()));
+					if(input.equalsIgnoreCase("lock")) {
+						writer.write("lock");
+						writer.flush();
+					} else {
+						writer.write("unlock");
+						writer.flush();
+					}
+					writer.close();
+					client.close();
+				} catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+}

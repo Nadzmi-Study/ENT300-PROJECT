@@ -1,0 +1,47 @@
+import java.net.*;
+import java.io.*;
+public class Server {
+	public static void main(String [] args) {		
+		try {
+			final ServerSocket server = new ServerSocket(9090);
+			System.out.println("Server started");
+			
+			while(true) {
+				new Thread(new Runnable() {
+					@Override
+					public void run() {
+						Socket client = null;
+						BufferedReader reader = null;
+						
+						String input = null;
+						
+						try {
+							client = server.accept();
+							
+							System.out.println("Initializing IO streams...");
+							reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
+							System.out.println("IO stream initialized");
+							
+							System.out.println("Reading input...");
+							input = reader.readLine();
+							System.out.println("Input: "+input);
+						} catch(Exception e) {
+							e.printStackTrace();
+						} finally {
+							try {
+								reader.close();
+								client.close();
+							} catch(Exception e) { e.printStackTrace(); }
+						}
+					}
+				}).start();
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				server.close();
+			} catch(Exception e) { e.printStackTrace(); }
+		}
+	}
+}
